@@ -1,5 +1,3 @@
-import Link from "next/link";
-
-export default function SlugMeal() {
-  return <h1>SlugMeal</h1>;
+export default function MealDetailsPage() {
+  return <h1>Meal Details</h1>;
 }
