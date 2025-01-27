@@ -1,10 +1,23 @@
 import fs from "node:fs";
-
 import sql from "better-sqlite3";
 import slugify from "slugify";
 import xss from "xss";
 
 const db = sql("meals.db");
+
+// Create the meals table if it doesn't exist
+db.exec(`
+  CREATE TABLE IF NOT EXISTS meals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    summary TEXT,
+    instructions TEXT,
+    creator TEXT,
+    creator_email TEXT,
+    image TEXT,
+    slug TEXT UNIQUE NOT NULL
+  )
+`);
 
 export async function getMeals() {
   await new Promise((resolve) => setTimeout(resolve, 5000));
