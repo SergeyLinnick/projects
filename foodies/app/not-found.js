@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Not Found",
+  description: "Not Found",
+};
+
 export default function NotFound() {
   return (
     <main className="not-found">
