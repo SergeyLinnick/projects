@@ -1,17 +1,11 @@
-import Link from "next/link";
+import { DUMMY_NEWS } from "@/dummy-news";
+import NewsList from "@/components/news-list";
 
 export default function NewsPage() {
   return (
-    <div>
-      <h1>News</h1>
-      <ul>
-        <li>
-          <Link href="news/1">First News Item</Link>
-        </li>
-        <li>
-          <Link href="news/2">Second News Item</Link>
-        </li>
-      </ul>
-    </div>
+    <>
+      <h1>News Page</h1>
+      <NewsList news={DUMMY_NEWS} />
+    </>
   );
 }
