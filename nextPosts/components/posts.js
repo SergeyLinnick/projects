@@ -10,11 +10,7 @@ function Post({ post, action }) {
   return (
     <article className="post">
       <div className="post-image">
-        <img
-          src={post.image}
-          alt={post.title}
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
+        <img src={post.image} alt={post.title} />
       </div>
       <div className="post-content">
         <header>
