@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "NextPosts",
-  description: "Browse and share amazing posts.",
+  description: "Browse our posts.",
 };
 
 export default function RootLayout({ children }) {
