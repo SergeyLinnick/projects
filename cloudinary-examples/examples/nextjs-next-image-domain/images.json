@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sheep",
+    "title": "Sheep",
+    "image": "https://res.cloudinary.com/colbycloud-examples/image/upload/samples/sheep.jpg",
+    "width": 1600,
+    "height": 1067
+  },
+  {
+    "id": "nature-mountains",
+    "title": "Nature",
+    "image": "https://res.cloudinary.com/colbycloud-examples/image/upload/samples/landscapes/nature-mountains.jpg",
+    "width": 3000,
+    "height": 2000
+  },
+  {
+    "id": "leather-bag-gray",
+    "title": "Bag",
+    "image": "https://res.cloudinary.com/colbycloud-examples/image/upload/samples/ecommerce/leather-bag-gray.jpg",
+    "width": 2385,
+    "height": 1590
+  },
+  {
+    "id": "bike",
+    "title": "Bike",
+    "image": "https://res.cloudinary.com/colbycloud-examples/image/upload/samples/bike.jpg",
+    "width": 2000,
+    "height": 1333
+  }
+]

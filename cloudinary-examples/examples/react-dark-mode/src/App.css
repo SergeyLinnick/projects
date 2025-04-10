@@ -1,0 +1,14 @@
+#root {
+  max-width: 56em;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.logo {
+  width: 16em;
+  height: auto;
+}
+
+.section {
+  margin-bottom: 3em;
+}
