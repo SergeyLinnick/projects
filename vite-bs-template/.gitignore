@@ -1,0 +1,46 @@
+# IDE and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Node and Vendor
+node_modules/
+vendor/
+.env
+.env.local
+.env.*.local
+
+# Build Output and Logs
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Windows System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Code Coverage
+coverage/
+.nyc_output/
+
+# Documentation Builds
+docs/_build/
+
+# Logs and Cache
+.cache/
+tmp/
+temp/
+*.tmp
+
+# Third-party Libraries
+bower_components/
+jspm_packages/
+
+# Test Output
+test-output/
