@@ -1,0 +1,26 @@
+{
+  "name": "shadcn-ui-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint",
+    "postinstall": "pnpm syncpack list-mismatches && pnpm syncpack format",
+    "preinstall": "pnpm syncpack list-mismatches || (echo 'Version mismatch detected!' && exit 1)",
+    "syncpack-check": "pnpm syncpack list-mismatches"
+  },
+  "devDependencies": {
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "prettier": "^3.5.1",
+    "syncpack": "^13.0.2",
+    "turbo": "^2.4.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.4.1"
+}
