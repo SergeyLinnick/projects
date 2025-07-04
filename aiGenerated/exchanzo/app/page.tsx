@@ -1,8 +1,8 @@
 "use client"
 import { Header } from "@/components/header"
-import { ExchangeRatesChart } from "@/components/exchange-rates-chart"
-import { CurrencyConverter } from "@/components/currency-converter"
-import { CurrencyPairs } from "@/components/currency-pairs"
+import { ExchangeRatesChartNBU } from "@/components/exchange-rates-chart-nbu"
+import { CurrencyConverterNBU } from "@/components/currency-converter-nbu"
+import { CurrencyPairsNBU } from "@/components/currency-pairs-nbu"
 
 export default function HomePage() {
   return (
@@ -12,13 +12,13 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Charts and Converter */}
           <div className="lg:col-span-2 space-y-6">
-            <ExchangeRatesChart />
-            <CurrencyConverter />
+            <ExchangeRatesChartNBU />
+            <CurrencyConverterNBU />
           </div>
 
           {/* Right Column - Currency Pairs */}
           <div className="lg:col-span-1">
-            <CurrencyPairs />
+            <CurrencyPairsNBU />
           </div>
         </div>
       </main>
