@@ -85,7 +85,7 @@ export function CurrencyConverterNBU() {
   }, [fromAmount, fromCurrency, toCurrency, nbuRates])
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ export function CurrencyConverterNBU() {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
             {/* From Currency */}
             <div className="md:col-span-2 space-y-2">
-              <label className="text-sm font-medium text-gray-700">From</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">From</label>
               <div className="flex space-x-2">
                 <Input
                   type="number"
@@ -157,7 +157,7 @@ export function CurrencyConverterNBU() {
 
             {/* To Currency */}
             <div className="md:col-span-2 space-y-2">
-              <label className="text-sm font-medium text-gray-700">To</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">To</label>
               <div className="flex space-x-2">
                 <Select value={toCurrency} onValueChange={setToCurrency}>
                   <SelectTrigger className="w-28">
@@ -192,8 +192,8 @@ export function CurrencyConverterNBU() {
 
           {/* Exchange Rate Info */}
           {exchangeRate > 0 && (
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="text-sm text-blue-800">
+            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="text-sm text-blue-800 dark:text-blue-200">
                 <div className="font-medium">Exchange Rate</div>
                 <div className="mt-1">
                   1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}

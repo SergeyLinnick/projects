@@ -58,16 +58,16 @@ export function CurrencyPairsNBU() {
   if (loading && rates.length === 0) {
     return (
       <div className="space-y-4">
-        <Card>
+        <Card className="dark:bg-gray-800 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <CardTitle className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
               <RefreshCw className="w-5 h-5 animate-spin text-blue-600" />
               Loading NBU Rates...
             </CardTitle>
           </CardHeader>
         </Card>
         {[1, 2, 3, 4].map((i) => (
-          <Card key={i}>
+          <Card key={i} className="dark:bg-gray-800 dark:border-gray-700">
             <CardContent className="p-4">
               <div className="animate-pulse">
                 <div className="h-4 bg-gray-200 rounded w-16 mb-2"></div>
@@ -84,11 +84,11 @@ export function CurrencyPairsNBU() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CardTitle className="text-lg font-semibold">NBU Exchange Rates</CardTitle>
+              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">NBU Exchange Rates</CardTitle>
               <Badge variant="outline" className="text-xs">
                 Official
               </Badge>
@@ -98,7 +98,7 @@ export function CurrencyPairsNBU() {
             </Button>
           </div>
           {lastUpdated && (
-            <div className="flex items-center gap-1 text-xs text-gray-500">
+            <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <Clock className="w-3 h-3" />
               <span>Updated: {lastUpdated}</span>
             </div>
@@ -108,7 +108,7 @@ export function CurrencyPairsNBU() {
 
       {/* Error State */}
       {error && (
-        <Card>
+        <Card className="dark:bg-gray-800 dark:border-gray-700">
           <CardContent className="p-4">
             <div className="text-center text-red-600">
               <div className="mb-2">{error}</div>
@@ -128,13 +128,16 @@ export function CurrencyPairsNBU() {
         const { change, changePercent, trend } = calculateRateChange(rate.rate, previousRate)
 
         return (
-          <Card key={rate.code} className="hover:shadow-md transition-all duration-200 border-l-4 border-l-blue-500">
+          <Card
+            key={rate.code}
+            className="hover:shadow-md dark:hover:shadow-lg transition-all duration-200 border-l-4 border-l-blue-500 dark:bg-gray-800 dark:border-gray-700"
+          >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="text-2xl">{currencyInfo?.flag || "💱"}</div>
                   <div>
-                    <div className="font-semibold text-gray-900 flex items-center gap-2">
+                    <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       {rate.code}/UAH
                       {trend !== "neutral" && (
                         <Badge variant={trend === "up" ? "default" : "destructive"} className="text-xs px-1 py-0">
@@ -142,11 +145,11 @@ export function CurrencyPairsNBU() {
                         </Badge>
                       )}
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
                       {rate.rate.toFixed(2)}
-                      <span className="text-sm font-normal text-gray-500 ml-1">UAH</span>
+                      <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-1">UAH</span>
                     </div>
-                    <div className="text-xs text-gray-500 truncate max-w-[120px]">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[120px]">
                       {currencyInfo?.name || rate.name}
                     </div>
                   </div>
@@ -155,7 +158,11 @@ export function CurrencyPairsNBU() {
                 <div className="text-right">
                   <div
                     className={`flex items-center space-x-1 justify-end ${
-                      trend === "up" ? "text-green-600" : trend === "down" ? "text-red-600" : "text-gray-500"
+                      trend === "up"
+                        ? "text-green-600"
+                        : trend === "down"
+                          ? "text-red-600"
+                          : "text-gray-500 dark:text-gray-400"
                     }`}
                   >
                     {trend === "up" ? (
@@ -174,7 +181,9 @@ export function CurrencyPairsNBU() {
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">1 {currencyInfo?.symbol || rate.code}</div>
+                  <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                    1 {currencyInfo?.symbol || rate.code}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -183,7 +192,7 @@ export function CurrencyPairsNBU() {
       })}
 
       {/* Footer */}
-      <div className="text-xs text-gray-400 text-center mt-4 p-2">
+      <div className="text-xs text-gray-400 text-center mt-4 p-2 dark:text-gray-500">
         <div>Data provided by National Bank of Ukraine</div>
         <div className="mt-1">Rates updated daily on business days</div>
       </div>

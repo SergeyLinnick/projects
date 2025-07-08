@@ -43,9 +43,9 @@ export function ExchangeRatesChartNBU() {
 
   if (loading) {
     return (
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+          <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
             <span>Exchange Rates</span>
             <span className="text-sm font-normal text-gray-500">(NBU)</span>
           </CardTitle>
@@ -63,11 +63,11 @@ export function ExchangeRatesChartNBU() {
   }
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <CardTitle className="text-xl font-semibold">Exchange Rates</CardTitle>
+            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Exchange Rates</CardTitle>
             <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">NBU Official</span>
           </div>
           <div className="flex items-center space-x-4">
@@ -112,10 +112,10 @@ export function ExchangeRatesChartNBU() {
 
         {/* Current Rate Display */}
         {chartData.length > 0 && (
-          <div className="flex items-center gap-6 mt-4 p-4 bg-gray-50 rounded-lg">
+          <div className="flex items-center gap-6 mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
-              <div className="text-sm text-gray-600">Current Rate</div>
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-sm text-gray-600 dark:text-gray-300">Current Rate</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {currentRate.toFixed(2)} {currencyInfo?.symbol || "UAH"}
               </div>
             </div>
@@ -164,10 +164,11 @@ export function ExchangeRatesChartNBU() {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "white",
-                    border: "1px solid #e5e7eb",
+                    backgroundColor: "var(--background)",
+                    border: "1px solid var(--border)",
                     borderRadius: "8px",
                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                    color: "var(--foreground)",
                   }}
                   formatter={(value: number) => [`${value.toFixed(4)} UAH`, `${selectedCurrency}/UAH`]}
                   labelFormatter={(label) => `Date: ${label}`}
