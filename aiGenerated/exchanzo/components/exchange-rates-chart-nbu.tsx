@@ -12,14 +12,22 @@ export function ExchangeRatesChartNBU() {
   const [chartData, setChartData] = useState<HistoricalData[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCurrency, setSelectedCurrency] = useState("USD")
-  const [selectedPeriod, setSelectedPeriod] = useState("30")
+  const [selectedPeriod, setSelectedPeriod] = useState("7")
   const [error, setError] = useState<string | null>(null)
 
   const fetchData = async () => {
     try {
       setLoading(true)
       setError(null)
-      const days = Number.parseInt(selectedPeriod)
+
+      let days: number
+      if (selectedPeriod === "all") {
+        // NBU API has data from around 1996, so we'll use a large number
+        days = 10000 // Approximately 27 years
+      } else {
+        days = Number.parseInt(selectedPeriod)
+      }
+
       const data = await getNBUHistoricalRates(selectedCurrency, days)
       setChartData(data)
     } catch (error) {
@@ -82,26 +90,29 @@ export function ExchangeRatesChartNBU() {
                 <SelectItem value="EUR">
                   <span className="flex items-center gap-2">🇪🇺 EUR/UAH</span>
                 </SelectItem>
-                <SelectItem value="GBP">
-                  <span className="flex items-center gap-2">🇬🇧 GBP/UAH</span>
+                <SelectItem value="TRY">
+                  <span className="flex items-center gap-2">🇹🇷 TRY/UAH</span>
                 </SelectItem>
                 <SelectItem value="PLN">
                   <span className="flex items-center gap-2">🇵🇱 PLN/UAH</span>
                 </SelectItem>
-                <SelectItem value="CHF">
-                  <span className="flex items-center gap-2">🇨🇭 CHF/UAH</span>
-                </SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-              <SelectTrigger className="w-32">
+              <SelectTrigger className="w-36">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="1">1 day</SelectItem>
                 <SelectItem value="7">7 days</SelectItem>
                 <SelectItem value="14">2 weeks</SelectItem>
                 <SelectItem value="30">30 days</SelectItem>
                 <SelectItem value="60">60 days</SelectItem>
+                <SelectItem value="90">90 days</SelectItem>
+                <SelectItem value="180">6 months</SelectItem>
+                <SelectItem value="365">1 year</SelectItem>
+                <SelectItem value="1825">5 years</SelectItem>
+                <SelectItem value="all">All time</SelectItem>
               </SelectContent>
             </Select>
             <Button variant="outline" size="sm" onClick={fetchData} disabled={loading}>
@@ -133,6 +144,12 @@ export function ExchangeRatesChartNBU() {
                 {rateChangePercent.toFixed(2)}%)
               </div>
             </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              {chartData.length} data points •{" "}
+              {selectedPeriod === "all"
+                ? "All available data"
+                : `Last ${selectedPeriod === "1" ? "1 day" : selectedPeriod === "7" ? "7 days" : selectedPeriod === "14" ? "2 weeks" : selectedPeriod === "30" ? "30 days" : selectedPeriod === "60" ? "60 days" : selectedPeriod === "90" ? "90 days" : selectedPeriod === "180" ? "6 months" : selectedPeriod === "365" ? "1 year" : selectedPeriod === "1825" ? "5 years" : selectedPeriod + " days"}`}
+            </div>
           </div>
         )}
       </CardHeader>
@@ -154,6 +171,10 @@ export function ExchangeRatesChartNBU() {
                   axisLine={false}
                   tickLine={false}
                   tick={{ fontSize: 12, fill: "#6B7280" }}
+                  interval={chartData.length > 50 ? "preserveStartEnd" : 0}
+                  angle={chartData.length > 30 ? -45 : 0}
+                  textAnchor={chartData.length > 30 ? "end" : "middle"}
+                  height={chartData.length > 30 ? 60 : 30}
                 />
                 <YAxis
                   domain={["dataMin - 0.5", "dataMax + 0.5"]}

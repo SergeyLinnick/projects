@@ -51,8 +51,8 @@ export function Header() {
                 <SelectContent>
                   <SelectItem value="USD">USD</SelectItem>
                   <SelectItem value="EUR">EUR</SelectItem>
-                  <SelectItem value="GBP">GBP</SelectItem>
-                  <SelectItem value="JPY">JPY</SelectItem>
+                  <SelectItem value="TRY">TRY</SelectItem>
+                  <SelectItem value="UAH">UAH</SelectItem>
                 </SelectContent>
               </Select>
             </div>

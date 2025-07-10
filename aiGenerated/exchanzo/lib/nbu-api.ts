@@ -36,12 +36,10 @@ export const SUPPORTED_CURRENCIES: CurrencyInfo[] = [
   { code: "UAH", name: "Ukrainian Hryvnia", symbol: "₴", flag: "🇺🇦" },
   { code: "USD", name: "US Dollar", symbol: "$", flag: "🇺🇸" },
   { code: "EUR", name: "Euro", symbol: "€", flag: "🇪🇺" },
-  { code: "GBP", name: "British Pound", symbol: "£", flag: "🇬🇧" },
+  { code: "TRY", name: "Turkish Lira", symbol: "₺", flag: "🇹🇷" },
   { code: "PLN", name: "Polish Zloty", symbol: "zł", flag: "🇵🇱" },
   { code: "CZK", name: "Czech Koruna", symbol: "Kč", flag: "🇨🇿" },
-  { code: "CHF", name: "Swiss Franc", symbol: "₣", flag: "🇨🇭" },
   { code: "CAD", name: "Canadian Dollar", symbol: "C$", flag: "🇨🇦" },
-  { code: "JPY", name: "Japanese Yen", symbol: "¥", flag: "🇯🇵" },
   { code: "CNY", name: "Chinese Yuan", symbol: "¥", flag: "🇨🇳" },
 ]
 
@@ -67,8 +65,8 @@ export async function getNBUCurrentRates(): Promise<ProcessedRate[]> {
         date: item.exchangedate,
       }))
       .sort((a, b) => {
-        // Sort by importance: USD, EUR, GBP, then alphabetically
-        const order = ["USD", "EUR", "GBP"]
+        // Sort by importance: USD, EUR, TRY, then alphabetically
+        const order = ["USD", "EUR", "TRY"]
         const aIndex = order.indexOf(a.code)
         const bIndex = order.indexOf(b.code)
 
@@ -117,9 +115,31 @@ export async function getNBUHistoricalRates(currencyCode: string, days = 30): Pr
   const promises: Promise<void>[] = []
 
   try {
+    // For very large date ranges, we'll sample data points to avoid overwhelming the API
+    const actualDays = days
+    let skipDays = 1
+
+    // Optimize for large date ranges
+    if (days > 365) {
+      // For more than 1 year, sample every 7 days
+      skipDays = 7
+    } else if (days > 90) {
+      // For more than 3 months, sample every 3 days
+      skipDays = 3
+    } else if (days > 30) {
+      // For more than 1 month, sample every 2 days
+      skipDays = 2
+    }
+
+    // Cap the maximum number of API calls to prevent timeout
+    const maxDataPoints = 200
+    if (Math.floor(actualDays / skipDays) > maxDataPoints) {
+      skipDays = Math.ceil(actualDays / maxDataPoints)
+    }
+
     // Create array of dates to fetch
     const datesToFetch: Date[] = []
-    for (let i = days; i >= 0; i--) {
+    for (let i = actualDays; i >= 0; i -= skipDays) {
       const date = new Date(today)
       date.setDate(date.getDate() - i)
 
@@ -129,13 +149,16 @@ export async function getNBUHistoricalRates(currencyCode: string, days = 30): Pr
       }
     }
 
-    // Batch requests with delay to avoid overwhelming the API
-    for (let i = 0; i < datesToFetch.length; i += 5) {
-      const batch = datesToFetch.slice(i, i + 5)
+    // Process in smaller batches to avoid rate limiting
+    const batchSize = days > 365 ? 3 : 5
+
+    for (let i = 0; i < datesToFetch.length; i += batchSize) {
+      const batch = datesToFetch.slice(i, i + batchSize)
 
       const batchPromises = batch.map(async (date, index) => {
-        // Add staggered delay
-        await new Promise((resolve) => setTimeout(resolve, index * 200))
+        // Add staggered delay based on batch size
+        const delay = days > 365 ? index * 500 : index * 200
+        await new Promise((resolve) => setTimeout(resolve, delay))
 
         const dateStr = formatDateForNBU(date)
 
@@ -161,6 +184,11 @@ export async function getNBUHistoricalRates(currencyCode: string, days = 30): Pr
 
       // Wait for batch to complete before starting next batch
       await Promise.all(batchPromises)
+
+      // Add delay between batches for larger date ranges
+      if (days > 90 && i + batchSize < datesToFetch.length) {
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+      }
     }
 
     await Promise.all(promises)
@@ -221,12 +249,27 @@ function formatDateForNBU(date: Date): string {
 }
 
 function formatDateForChart(date: Date): string {
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+  const now = new Date()
+  const diffTime = Math.abs(now.getTime() - date.getTime())
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+  // For recent dates (within 30 days), show month/day
+  if (diffDays <= 30) {
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+  }
+  // For dates within a year, show month/day
+  else if (diffDays <= 365) {
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+  }
+  // For older dates, show month/year
+  else {
+    return date.toLocaleDateString("en-US", { month: "short", year: "2-digit" })
+  }
 }
 
 // Get major currency pairs with UAH
 export function getMajorCurrencyPairs(rates: ProcessedRate[]): ProcessedRate[] {
-  const majorCurrencies = ["USD", "EUR", "GBP", "PLN"]
+  const majorCurrencies = ["USD", "EUR", "TRY", "PLN"]
   return rates.filter((rate) => majorCurrencies.includes(rate.code))
 }
 
