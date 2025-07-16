@@ -1,0 +1,93 @@
+{
+	"meta": {
+		"generatedAt": "2025-07-16T21:58:03.291Z",
+		"tasksAnalyzed": 10,
+		"totalTasks": 10,
+		"analysisCount": 10,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Setup Next.js 15 Project with Turborepo",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the Next.js 15 and Turborepo setup into detailed implementation steps, including repository structure, package configuration, dependency installation, and initial project setup. Include specific commands and configuration files needed.",
+			"reasoning": "This task involves setting up a complex monorepo architecture with multiple modern technologies (Next.js 15, React 19, Turborepo) and configuring numerous dependencies. It requires deep understanding of build systems, package management, and modern frontend tooling. The configuration of testing frameworks and Storybook adds additional complexity."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Create Equipment Data Models and Types",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the equipment data models task into detailed steps for implementing TypeScript interfaces, Zod validation schemas, and mock data generation. Include specific implementation details for each model type and their relationships.",
+			"reasoning": "This task involves creating TypeScript interfaces and Zod schemas for data validation, which is moderately complex. The models themselves are relatively straightforward with clear relationships, but proper type safety and validation require careful implementation. Mock data generation adds some complexity but is well-defined."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Implement Equipment Listing View",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the equipment listing view implementation into detailed steps covering the table component, responsive design, data fetching logic, and UI state management. Include specific component structure and styling approaches.",
+			"reasoning": "This task requires implementing a complex UI component with multiple features including responsive design, data fetching with TanStack Query, and various UI elements (status indicators, avatars, action buttons). The table needs to handle different data states and be responsive across devices, adding significant complexity."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Implement Filtering and Search Functionality",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the filtering and search functionality into detailed implementation steps covering the filter components, search functionality with debounce, state management with Zustand, and integration with the data fetching layer.",
+			"reasoning": "This task involves implementing search and filtering functionality with state management using Zustand. The debounce functionality and integration with TanStack Query add complexity. The filter components themselves are moderately complex UI elements that need to interact with the global state."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Implement Add/Edit Equipment Form",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the equipment form implementation into detailed steps covering form structure, validation logic, submission handling, and error management. Include specific field implementations and form state management approaches.",
+			"reasoning": "Creating a form with React Hook Form and Zod validation is moderately complex. The form needs to handle both creation and editing modes, with different validation rules and submission logic. Integration with TanStack Query mutations and implementing proper error handling and success notifications adds significant complexity."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Implement Equipment Categories Management",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the categories management functionality into detailed implementation steps covering the categories table, CRUD operations, form implementation, and confirmation dialogs. Include specific component structure and state management approaches.",
+			"reasoning": "This task involves implementing a complete CRUD interface for managing categories. While the data model is simpler than the equipment model, the task requires implementing multiple UI components (table, form, confirmation dialogs) and handling various state transitions and error cases."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Implement Equipment Status Management",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the status management implementation into detailed steps covering the status badge component, status update functionality, quick actions, and history tracking. Include specific component implementations and state update approaches.",
+			"reasoning": "This task focuses on implementing status management functionality with visual indicators. The StatusBadge component and dropdown menu are moderately complex UI elements. The status update functionality requires integration with the existing equipment data model and proper state management."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Implement Assignment and Check-in/out History",
+			"complexityScore": 8,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the assignment and history tracking functionality into detailed implementation steps covering the assignment form, check-in/out operations, history view component, and integration with the equipment list. Include specific component implementations and data flow approaches.",
+			"reasoning": "This task involves implementing complex business logic for equipment assignment and history tracking. It requires creating multiple UI components (assignment modal, history view) and implementing time-based operations with proper validation. The integration with the existing equipment model and maintaining history records adds significant complexity."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Implement Bulk Actions",
+			"complexityScore": 7,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the bulk actions implementation into detailed steps covering row selection, bulk action toolbar, confirmation dialogs, and action execution. Include specific component implementations and state management approaches.",
+			"reasoning": "Implementing bulk actions requires managing selection state across multiple items and handling complex operations on multiple records simultaneously. The UI needs to adapt based on selection state, and confirmation dialogs need to handle various scenarios. Error handling for bulk operations adds additional complexity."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Implement Responsive Design and Accessibility",
+			"complexityScore": 8,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the responsive design and accessibility implementation into detailed steps covering responsive layouts, mobile-specific views, keyboard navigation, ARIA attributes, focus management, and accessibility testing. Include specific techniques and best practices for each area.",
+			"reasoning": "This task involves ensuring the entire application is responsive and accessible, which is inherently complex. It requires implementing different views for different screen sizes, adding proper keyboard navigation and screen reader support, and testing across multiple devices and assistive technologies. Meeting WCAG standards requires careful attention to detail across all components."
+		}
+	]
+}

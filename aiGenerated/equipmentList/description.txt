@@ -1,0 +1,97 @@
+Imlement qquipment design according main requirements
+
+Nextjs 15: React framework.
+React 19: UI library.
+Shadcn: UI component library for building consistent design systems.
+Turborepo: For scaling monorepos.
+Tailwind CSS 4: Utility-first CSS framework for custom designs.
+Story Book: For the components documentation.
+TanStack Query 5: Data-fetching and state management library.
+React Hook Form: Form management library for handling form state and validation.
+Zod: Validation library.
+Zustand: Managing state.
+Recharts: Integrate charts into your React application.
+Vitest + React Testing Library: Unit & integration testing.
+
+
+Design the UI/UX for the Equipment module. This module will support full lifecycle management of portable and field-deployed equipment, with tracking for ownership, maintenance, check-in/out history, usage (meter-based), and status.
+
+Unlike stationary factory equipment, this module focuses on equipment that is frequently used in the field or assigned to technicians, stored in service vans, or temporarily kept at a facility.
+
+📁 Screens Required
+1. Equipment Listing View
+Table or card-based layout
+
+Filters: Category, Status, Assigned To
+
+Search bar
+
+Actions: Add, Edit, View, Archive
+
+Bulk select and actions (Archive, Reassign)
+
+# Project Documentation
+
+## Overview
+This is a modern monorepo project built using PNPM and Turborepo. The project follows a modular architecture with clear separation between applications and shared packages.
+
+## Technology Stack
+
+### Core Technologies
+- **Package Manager**: PNPM v10.4.1
+- **Build System**: Turborepo v2.4.2
+- **Runtime**: Node.js (>=20)
+- **Language**: TypeScript v5.7.3
+- **Web Framework**: Next.js
+
+### Development Tools
+- **Code Quality**:
+  - ESLint for code linting
+  - Prettier v3.5.1 for code formatting
+  - TypeScript for type safety
+- **Package Management**:
+  - Syncpack v13.0.2 for version synchronization
+  - PNPM workspaces for monorepo management
+
+
+## Development Workflow
+
+1. **Setup**
+   - Ensure Node.js >=20 is installed
+   - Install PNPM v10.4.1 or later
+   - Run `pnpm install` to install dependencies
+
+2. **Development**
+   - Use `pnpm dev` to start development servers
+   - Make changes in respective packages
+   - Run `pnpm format` and `pnpm lint` before committing
+
+3. **Building**
+   - Use `pnpm build` to build all packages
+   - Build artifacts are generated in respective package directories
+
+## Best Practices
+
+1. **Package Management**
+   - Keep package versions in sync using syncpack
+   - Use workspace dependencies (`workspace:*`) for internal packages
+   - Follow semantic versioning for package releases
+
+2. **Code Quality**
+   - Follow TypeScript best practices
+   - Maintain consistent code style using Prettier
+   - Adhere to ESLint rules
+   - Write tests for new features
+
+3. **Monorepo Management**
+   - Keep shared code in appropriate packages
+   - Avoid circular dependencies
+   - Use Turborepo for efficient builds
+   - Maintain clear package boundaries
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+# Task ID: 2
+# Title: Create Equipment Data Models and Types
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Define TypeScript interfaces and Zod schemas for equipment data models, including categories, statuses, and assignment information.
+# Details:
+1. Create TypeScript interfaces for Equipment model:
+```typescript
+interface Equipment {
+  id: string;
+  name: string;
+  categoryId: string;
+  status: 'Active' | 'In Repair' | 'Out of Service' | 'Retired';
+  assignedTo: string | null;
+  serialNumber: string;
+  lastCheckOut: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+2. Define Category model:
+```typescript
+interface Category {
+  id: string;
+  name: string;
+  description?: string;
+}
+```
+
+3. Define Assignment History model:
+```typescript
+interface AssignmentHistory {
+  id: string;
+  equipmentId: string;
+  userId: string;
+  checkOutDate: Date;
+  checkInDate: Date | null;
+  notes?: string;
+}
+```
+
+4. Create Zod schemas for validation:
+```typescript
+const equipmentSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  categoryId: z.string().min(1, 'Category is required'),
+  status: z.enum(['Active', 'In Repair', 'Out of Service', 'Retired']),
+  assignedTo: z.string().nullable(),
+  serialNumber: z.string(),
+  lastCheckOut: z.date().nullable(),
+});
+```
+
+5. Create mock data for development and testing
+
+# Test Strategy:
+Write unit tests to validate the Zod schemas with various input scenarios, including valid and invalid data. Test that TypeScript types are correctly implemented and provide proper type safety.

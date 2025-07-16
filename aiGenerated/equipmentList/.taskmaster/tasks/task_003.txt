@@ -1,0 +1,72 @@
+# Task ID: 3
+# Title: Implement Equipment Listing View
+# Status: pending
+# Dependencies: 1, 2
+# Priority: high
+# Description: Create a responsive table/card-based layout for displaying equipment with filtering, search, and action capabilities.
+# Details:
+1. Create a new page for equipment listing
+2. Implement a data table component using Shadcn UI components
+3. Define columns for Equipment Name & Category, Status, Assigned To, Serial Number, Last Check Out
+4. Add status indicators with appropriate colors (Active: green, In Repair: yellow, Out of Service: red, Retired: gray)
+5. Implement user avatars or initials for the 'Assigned To' column
+6. Add action buttons for each row (View, Edit, Archive)
+7. Implement responsive design for mobile view (cards instead of table)
+8. Add pagination for large datasets
+9. Implement data fetching using TanStack Query
+
+```tsx
+// Example component structure
+const EquipmentList = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['equipment'],
+    queryFn: fetchEquipment
+  });
+  
+  return (
+    <div className="container mx-auto py-6">
+      <h1 className="text-2xl font-bold mb-6">Equipment List</h1>
+      
+      {/* Filters and search will be added in task #4 */}
+      
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Equipment Name & Category</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Assigned To</TableHead>
+              <TableHead>Serial Number</TableHead>
+              <TableHead>Last Check Out</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.name} ({item.category})</TableCell>
+                <TableCell>
+                  <StatusBadge status={item.status} />
+                </TableCell>
+                <TableCell>
+                  <UserAvatar user={item.assignedTo} />
+                </TableCell>
+                <TableCell>{item.serialNumber}</TableCell>
+                <TableCell>{formatDate(item.lastCheckOut)}</TableCell>
+                <TableCell>
+                  <ActionButtons item={item} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
+    </div>
+  );
+};
+```
+
+# Test Strategy:
+Create component tests using Vitest and React Testing Library to verify the table renders correctly with mock data. Test responsive behavior by simulating different viewport sizes. Create Storybook stories to document the component's various states (loading, empty, with data).

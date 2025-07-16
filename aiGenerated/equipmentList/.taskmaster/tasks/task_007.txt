@@ -1,0 +1,83 @@
+# Task ID: 7
+# Title: Implement Equipment Status Management
+# Status: pending
+# Dependencies: 3, 5
+# Priority: medium
+# Description: Create functionality to track and update equipment status (Active, In Repair, Out of Service, Retired) with visual status indicators.
+# Details:
+1. Create a StatusBadge component for visual status indicators
+2. Implement status update functionality in the equipment edit form
+3. Add quick status change actions in the equipment list
+4. Create a status history tracking system
+
+```tsx
+// StatusBadge component
+const StatusBadge = ({ status }) => {
+  const statusConfig = {
+    'Active': { color: 'bg-green-100 text-green-800', icon: CheckCircleIcon },
+    'In Repair': { color: 'bg-yellow-100 text-yellow-800', icon: WrenchIcon },
+    'Out of Service': { color: 'bg-red-100 text-red-800', icon: XCircleIcon },
+    'Retired': { color: 'bg-gray-100 text-gray-800', icon: ArchiveIcon },
+  };
+  
+  const config = statusConfig[status] || statusConfig['Active'];
+  
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}>
+      <config.icon className="-ml-0.5 mr-1.5 h-3 w-3" />
+      {status}
+    </span>
+  );
+};
+
+// Quick status update component
+const StatusUpdateMenu = ({ equipment }) => {
+  const queryClient = useQueryClient();
+  
+  const mutation = useMutation({
+    mutationFn: updateEquipmentStatus,
+    onSuccess: () => {
+      toast.success('Status updated successfully');
+      queryClient.invalidateQueries({ queryKey: ['equipment'] });
+    }
+  });
+  
+  const handleStatusChange = (status) => {
+    mutation.mutate({ id: equipment.id, status });
+  };
+  
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm">
+          <StatusBadge status={equipment.status} />
+          <ChevronDownIcon className="ml-1 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Change Status</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => handleStatusChange('Active')}>
+          <CheckCircleIcon className="mr-2 h-4 w-4 text-green-500" />
+          Active
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleStatusChange('In Repair')}>
+          <WrenchIcon className="mr-2 h-4 w-4 text-yellow-500" />
+          In Repair
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleStatusChange('Out of Service')}>
+          <XCircleIcon className="mr-2 h-4 w-4 text-red-500" />
+          Out of Service
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleStatusChange('Retired')}>
+          <ArchiveIcon className="mr-2 h-4 w-4 text-gray-500" />
+          Retired
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+```
+
+# Test Strategy:
+Test the StatusBadge component to ensure it correctly displays different statuses with appropriate colors and icons. Test the status update functionality to verify it correctly updates equipment status. Create Storybook stories for the status components in different states.

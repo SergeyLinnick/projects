@@ -1,0 +1,130 @@
+# Task ID: 9
+# Title: Implement Bulk Actions
+# Status: pending
+# Dependencies: 3, 8
+# Priority: low
+# Description: Add functionality to select multiple equipment items for bulk actions such as archiving or reassigning.
+# Details:
+1. Implement row selection in the equipment table
+2. Create a bulk actions toolbar that appears when items are selected
+3. Implement bulk archive functionality
+4. Implement bulk reassign functionality
+5. Add confirmation dialogs for bulk actions
+
+```tsx
+// Enhanced equipment list with selection
+const EquipmentList = () => {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const { data, isLoading } = useQuery({
+    queryKey: ['equipment'],
+    queryFn: fetchEquipment
+  });
+  
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      setSelectedItems(data.map(item => item.id));
+    } else {
+      setSelectedItems([]);
+    }
+  };
+  
+  const handleSelectItem = (id) => {
+    setSelectedItems(prev => {
+      if (prev.includes(id)) {
+        return prev.filter(itemId => itemId !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
+  };
+  
+  const [bulkActionOpen, setBulkActionOpen] = useState(false);
+  const [bulkAction, setBulkAction] = useState(null);
+  
+  const handleBulkAction = (action) => {
+    setBulkAction(action);
+    setBulkActionOpen(true);
+  };
+  
+  return (
+    <div className="container mx-auto py-6">
+      <h1 className="text-2xl font-bold mb-6">Equipment List</h1>
+      
+      {selectedItems.length > 0 && (
+        <div className="bg-muted p-4 rounded-md mb-4 flex items-center justify-between">
+          <span>{selectedItems.length} items selected</span>
+          <div className="space-x-2">
+            <Button variant="outline" onClick={() => handleBulkAction('archive')}>
+              Archive Selected
+            </Button>
+            <Button variant="outline" onClick={() => handleBulkAction('reassign')}>
+              Reassign Selected
+            </Button>
+            <Button variant="ghost" onClick={() => setSelectedItems([])}>
+              Clear Selection
+            </Button>
+          </div>
+        </div>
+      )}
+      
+      {/* Table with checkboxes */}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-12">
+              <Checkbox 
+                checked={selectedItems.length === data?.length} 
+                onCheckedChange={handleSelectAll} 
+              />
+            </TableHead>
+            <TableHead>Equipment Name & Category</TableHead>
+            {/* Other headers */}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data?.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>
+                <Checkbox 
+                  checked={selectedItems.includes(item.id)} 
+                  onCheckedChange={() => handleSelectItem(item.id)} 
+                />
+              </TableCell>
+              <TableCell>{item.name} ({item.category})</TableCell>
+              {/* Other cells */}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      
+      {/* Bulk action modals */}
+      {bulkActionOpen && bulkAction === 'archive' && (
+        <BulkArchiveModal 
+          selectedItems={selectedItems} 
+          isOpen={bulkActionOpen} 
+          onClose={() => setBulkActionOpen(false)} 
+          onSuccess={() => {
+            setSelectedItems([]);
+            setBulkActionOpen(false);
+          }} 
+        />
+      )}
+      
+      {bulkActionOpen && bulkAction === 'reassign' && (
+        <BulkReassignModal 
+          selectedItems={selectedItems} 
+          isOpen={bulkActionOpen} 
+          onClose={() => setBulkActionOpen(false)} 
+          onSuccess={() => {
+            setSelectedItems([]);
+            setBulkActionOpen(false);
+          }} 
+        />
+      )}
+    </div>
+  );
+};
+```
+
+# Test Strategy:
+Test the selection functionality to ensure items can be selected and deselected correctly. Test bulk action modals to verify they correctly process the selected items. Test confirmation dialogs and error handling. Create Storybook stories for the bulk action components.
