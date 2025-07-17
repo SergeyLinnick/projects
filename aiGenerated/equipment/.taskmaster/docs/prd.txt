@@ -1,0 +1,83 @@
+<context>
+# Overview  
+The Equipment Management module provides full lifecycle management for portable and field-deployed equipment. It enables organizations to track ownership, maintenance, check-in/out history, usage (meter-based), and status of equipment that is frequently used in the field, assigned to technicians, stored in service vans, or temporarily kept at a facility. The system is designed to optimize asset utilization, reduce loss, and streamline maintenance and assignment workflows.
+
+# Core Features  
+- Equipment Listing View: Table/card-based layout with filters (Category, Status, Assigned To), search bar, bulk select, and actions (Add, Edit, View, Archive, Reassign).
+- Add/Edit Equipment Form: Capture equipment details (name, category, make, model, serial number, description, tags, photos, QR code, procurement/warranty info, usage tracking, custom fields).
+- Equipment Categories: Manage predefined and custom categories, similar to vehicle groups.
+- Equipment View Screen: Detailed summary with timeline (activity log), assignment info, quick actions (Check In, Update Meter), and tabs for summary, activity, ownership/assignment, check-in/out, inspections, maintenance, service history, and documents.
+- Assignment & Check-In/Out: Assign equipment to user, vehicle, or facility (one at a time), track permanent/temporary assignments, and maintain assignment/check-in/out history.
+- Status Tracking: Support for Active, In Repair, Out of Service, Retired statuses with color indicators.
+- Meter & Usage Tracking: Track usage by distance, time, or count with unit validation and history.
+- Document Management: Attach photos, manuals, warranty docs, and receipts.
+- Bulk Management: Multi-select for bulk actions (archive, reassign).
+
+# User Experience  
+- User Personas: Field technicians, fleet managers, warehouse staff, maintenance coordinators.
+- Key User Flows: 
+  - View/filter/search equipment list
+  - Add new equipment
+  - Edit equipment details
+  - Assign equipment
+  - Check in/out equipment
+  - Update meter/usage
+  - View equipment history and documents
+- UI/UX Considerations: 
+  - Consistent with Vehicle Management module
+  - Clear iconography and color indicators for status/assignment
+  - Optimized for bulk actions and quick access to key functions
+  - Responsive design for desktop and tablet use
+</context>
+<PRD>
+# Technical Architecture  
+- System Components: 
+  - Frontend (React/Next.js UI)
+  - Backend API (CRUD for equipment, assignments, check-in/out, maintenance, documents)
+  - Database (equipment, categories, assignments, check-in/out logs, meter readings, documents)
+- Data Models: 
+  - Equipment (id, name, category, make, model, serial, status, tags, photos, QR, procurement, warranty, usage, custom fields)
+  - Assignment (equipment_id, assigned_to_type, assigned_to_id, type, start_date, end_date, history)
+  - CheckInOut (equipment_id, user_id/vehicle_id/facility_id, timestamp, notes)
+  - Meter (equipment_id, type, value, unit, history)
+  - Document (equipment_id, type, file, uploaded_by, date)
+- APIs: RESTful endpoints for all CRUD and workflow actions
+- Integrations: QR code generation, file storage for documents/photos
+- Infrastructure: Cloud or on-prem deployment, secure file storage, scalable DB
+
+# Development Roadmap  
+- MVP Requirements:
+  - Equipment listing, add/edit form, categories management
+  - Assignment and check-in/out workflows
+  - Status and meter tracking
+  - Document upload/management
+  - Bulk actions and search/filter
+- Future Enhancements:
+  - Advanced reporting/analytics
+  - Mobile app support
+  - Integration with external asset management or ERP systems
+  - Automated maintenance scheduling
+  - Custom workflow automation
+
+# Logical Dependency Chain
+- Foundation: Equipment data model, categories, and CRUD APIs
+- Next: Listing view, add/edit form, and categories management UI
+- Then: Assignment and check-in/out logic and UI
+- Then: Meter tracking and validation
+- Then: Document management
+- Then: Bulk actions and advanced filters
+- Final: Activity timeline, advanced reporting, and integrations
+
+# Risks and Mitigations  
+- Technical: Ensuring unique serial numbers, meter value validation (no backward entries), scalable document storage
+- MVP Scope: Focus on core workflows (listing, assignment, check-in/out, meter, docs)
+- Resource: Prioritize features for MVP, defer advanced analytics/integrations
+
+# Appendix  
+- Status values: Active, In Repair, Out of Service, Retired
+- Meter units: Miles, Kilometers, Hours, Minutes, Cycles, Starts, Jobs
+- Assignment: Only one entity at a time (user, vehicle, or facility)
+- Design: Match Vehicle Management module for consistency
+- Color indicators: Red = Out of Service, etc.
+- Optimize for bulk management scenarios
+</PRD> 

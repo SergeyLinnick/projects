@@ -1,0 +1,18 @@
+# Task ID: 6
+# Title: Develop Equipment Categories Management
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Create the interface and functionality for managing equipment categories.
+# Details:
+Implement a categories management interface with:
+1. List view of existing categories with edit/delete actions
+2. Add/edit form for categories with name and description
+3. Validation to prevent deletion of categories in use
+4. Ability to set default custom fields for a category
+5. Option to set icon or color for visual identification
+
+Create the necessary API endpoints for category CRUD operations if not already implemented. Ensure proper validation and error handling. Add confirmation dialogs for destructive actions.
+
+# Test Strategy:
+Test category creation, editing, and deletion. Verify validation prevents deletion of categories in use. Test custom field association with categories. Ensure UI updates immediately after changes.

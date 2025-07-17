@@ -1,0 +1,29 @@
+# Task ID: 8
+# Title: Develop Assignment and Check-In/Out Functionality
+# Status: pending
+# Dependencies: 3, 7
+# Priority: high
+# Description: Implement the logic and UI for assigning equipment and tracking check-in/out activities.
+# Details:
+Create the following components and functionality:
+1. Assignment form with:
+   - Selection of assignment type (user, vehicle, facility)
+   - Entity selector based on type
+   - Assignment duration (permanent/temporary with dates)
+   - Notes field
+2. Check-in/out workflow with:
+   - Action selection (check in/out)
+   - Location selection
+   - Condition assessment
+   - Notes and photo capture
+3. Assignment history view with timeline
+4. API endpoints for:
+   - POST /api/equipment/:id/assign
+   - POST /api/equipment/:id/check-in
+   - POST /api/equipment/:id/check-out
+   - GET /api/equipment/:id/assignment-history
+
+Implement validation to ensure equipment can only be assigned to one entity at a time. Add confirmation steps for reassignment of already assigned equipment.
+
+# Test Strategy:
+Test assignment to different entity types. Verify check-in/out process works correctly. Test validation rules for assignments. Ensure history is properly recorded and displayed. Test edge cases like reassigning already assigned equipment.

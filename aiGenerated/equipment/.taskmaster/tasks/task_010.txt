@@ -1,0 +1,27 @@
+# Task ID: 10
+# Title: Develop Document Management System
+# Status: pending
+# Dependencies: 3, 7
+# Priority: medium
+# Description: Implement functionality for attaching, viewing, and managing documents related to equipment.
+# Details:
+Create a document management system with:
+1. Document upload component with:
+   - File selection and drag-drop support
+   - Document type categorization
+   - Description and metadata fields
+   - Progress indicator for uploads
+2. Document listing with:
+   - Filtering by document type
+   - Preview for images and PDFs
+   - Download functionality
+   - Delete/archive options
+3. API endpoints:
+   - POST /api/equipment/:id/documents
+   - GET /api/equipment/:id/documents
+   - DELETE /api/equipment/:id/documents/:docId
+
+Implement secure file storage integration (AWS S3, Azure Blob Storage, or similar). Add validation for file types and sizes. Implement thumbnail generation for images and preview for supported document types.
+
+# Test Strategy:
+Test file upload with various file types and sizes. Verify preview functionality works for supported formats. Test download and delete operations. Ensure proper error handling for failed uploads. Verify security of file access.

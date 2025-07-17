@@ -1,0 +1,20 @@
+# Task ID: 2
+# Title: Implement Equipment Data Models and Database Schema
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Design and implement the database schema for equipment, categories, assignments, check-in/out logs, meter readings, and documents.
+# Details:
+Create database migrations for all required tables:
+1. Equipment table with fields: id, name, category_id, make, model, serial_number, status, description, tags (array), qr_code, procurement_date, procurement_cost, warranty_start, warranty_end, created_at, updated_at, archived_at
+2. Categories table with fields: id, name, description, created_at, updated_at
+3. Assignments table with fields: id, equipment_id, assigned_to_type (enum: 'user', 'vehicle', 'facility'), assigned_to_id, assignment_type (enum: 'permanent', 'temporary'), start_date, end_date, notes, created_at, updated_at
+4. CheckInOut table with fields: id, equipment_id, user_id, location_type (enum: 'user', 'vehicle', 'facility'), location_id, action (enum: 'check_in', 'check_out'), timestamp, notes, created_at
+5. MeterReadings table with fields: id, equipment_id, type (enum: 'distance', 'time', 'count'), value, unit, recorded_at, recorded_by, created_at
+6. Documents table with fields: id, equipment_id, type, file_name, file_path, file_size, mime_type, uploaded_by, created_at
+7. CustomFields table with fields: id, equipment_id, field_name, field_value, created_at, updated_at
+
+Implement appropriate indexes, foreign keys, and constraints. Create ORM models that correspond to these tables.
+
+# Test Strategy:
+Write unit tests for model validations and relationships. Test database migrations up and down. Verify constraints work as expected (e.g., unique serial numbers). Create seed data for testing.

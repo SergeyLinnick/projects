@@ -1,0 +1,18 @@
+# Task ID: 5
+# Title: Implement Add/Edit Equipment Form
+# Status: pending
+# Dependencies: 3
+# Priority: high
+# Description: Create a comprehensive form for adding and editing equipment with all required fields and validation.
+# Details:
+Develop a multi-step or tabbed form with the following sections:
+1. Basic Info: name, category (dropdown), make, model, serial number, description, tags (multi-select)
+2. Media: photo upload with preview, QR code generation and display
+3. Procurement: purchase date, cost, supplier, warranty start/end dates
+4. Usage: meter type selection, initial reading, unit selection
+5. Custom Fields: dynamic field addition based on category
+
+Implement form validation using Formik or React Hook Form with Yup or Zod schemas. Add file upload functionality for photos with preview. Integrate QR code generation for equipment identification. Ensure all fields are properly validated before submission. Implement autosave functionality for long forms.
+
+# Test Strategy:
+Test form validation for all required fields. Verify file uploads work correctly. Test QR code generation. Ensure form state is preserved between steps. Test error handling for submission failures. Verify custom fields work correctly based on category selection.

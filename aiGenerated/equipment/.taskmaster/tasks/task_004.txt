@@ -1,0 +1,22 @@
+# Task ID: 4
+# Title: Create Equipment Listing View Component
+# Status: pending
+# Dependencies: 3
+# Priority: high
+# Description: Develop the table/card-based layout for equipment listing with filters, search, and bulk actions.
+# Details:
+Create a responsive listing component with the following features:
+1. Dual view mode: table and card layouts with toggle
+2. Filterable by Category, Status, and Assigned To
+3. Search bar that queries across name, make, model, and serial number
+4. Bulk selection with checkboxes
+5. Action buttons for Add, Edit, View, Archive, and Reassign
+6. Pagination controls
+7. Sortable columns (for table view)
+8. Status indicators with appropriate colors
+9. Quick view of assignment information
+
+Implement data fetching with React Query or SWR for efficient caching and revalidation. Add loading states and error handling. Ensure responsive design works on desktop and tablet.
+
+# Test Strategy:
+Write component tests using React Testing Library. Test filter functionality, search, pagination, and sorting. Verify bulk selection works correctly. Test responsive behavior at different viewport sizes. Verify accessibility compliance with axe or similar tools.

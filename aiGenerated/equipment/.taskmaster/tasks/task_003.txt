@@ -1,0 +1,22 @@
+# Task ID: 3
+# Title: Develop Equipment CRUD API Endpoints
+# Status: pending
+# Dependencies: 2
+# Priority: high
+# Description: Implement RESTful API endpoints for creating, reading, updating, and deleting equipment records.
+# Details:
+Create the following API endpoints:
+1. GET /api/equipment - List all equipment with pagination, sorting, and filtering
+2. GET /api/equipment/:id - Get single equipment details
+3. POST /api/equipment - Create new equipment
+4. PUT /api/equipment/:id - Update equipment
+5. DELETE /api/equipment/:id - Archive equipment (soft delete)
+6. GET /api/equipment/categories - List all categories
+7. POST /api/equipment/categories - Create new category
+8. PUT /api/equipment/categories/:id - Update category
+9. DELETE /api/equipment/categories/:id - Delete category
+
+Implement proper validation for all endpoints. Include filtering by category, status, and assignment. Support search functionality across name, make, model, and serial number fields. Implement pagination with customizable page size.
+
+# Test Strategy:
+Write integration tests for each endpoint covering success and error cases. Test validation rules, filtering, and pagination. Verify proper error handling for invalid inputs and unauthorized access. Test search functionality with various query parameters.

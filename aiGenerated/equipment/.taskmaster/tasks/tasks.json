@@ -1,0 +1,295 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Structure and Environment",
+        "description": "Initialize the React/Next.js frontend and backend API structure for the Equipment Management module.",
+        "details": "Create a new Next.js project with TypeScript support. Set up the folder structure following best practices with separate directories for components, pages, API routes, hooks, utils, and types. Configure ESLint and Prettier for code quality. Set up the backend API structure with appropriate middleware for authentication, error handling, and logging. Initialize database connection and ORM setup (e.g., Prisma or Sequelize). Create environment configuration for development, testing, and production environments.",
+        "testStrategy": "Verify project builds successfully. Ensure all development tools (ESLint, TypeScript, etc.) are functioning. Test API connectivity and database connection. Create basic smoke tests for the application startup.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Implement Equipment Data Models and Database Schema",
+        "description": "Design and implement the database schema for equipment, categories, assignments, check-in/out logs, meter readings, and documents.",
+        "details": "Create database migrations for all required tables:\n1. Equipment table with fields: id, name, category_id, make, model, serial_number, status, description, tags (array), qr_code, procurement_date, procurement_cost, warranty_start, warranty_end, created_at, updated_at, archived_at\n2. Categories table with fields: id, name, description, created_at, updated_at\n3. Assignments table with fields: id, equipment_id, assigned_to_type (enum: 'user', 'vehicle', 'facility'), assigned_to_id, assignment_type (enum: 'permanent', 'temporary'), start_date, end_date, notes, created_at, updated_at\n4. CheckInOut table with fields: id, equipment_id, user_id, location_type (enum: 'user', 'vehicle', 'facility'), location_id, action (enum: 'check_in', 'check_out'), timestamp, notes, created_at\n5. MeterReadings table with fields: id, equipment_id, type (enum: 'distance', 'time', 'count'), value, unit, recorded_at, recorded_by, created_at\n6. Documents table with fields: id, equipment_id, type, file_name, file_path, file_size, mime_type, uploaded_by, created_at\n7. CustomFields table with fields: id, equipment_id, field_name, field_value, created_at, updated_at\n\nImplement appropriate indexes, foreign keys, and constraints. Create ORM models that correspond to these tables.",
+        "testStrategy": "Write unit tests for model validations and relationships. Test database migrations up and down. Verify constraints work as expected (e.g., unique serial numbers). Create seed data for testing.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Develop Equipment CRUD API Endpoints",
+        "description": "Implement RESTful API endpoints for creating, reading, updating, and deleting equipment records.",
+        "details": "Create the following API endpoints:\n1. GET /api/equipment - List all equipment with pagination, sorting, and filtering\n2. GET /api/equipment/:id - Get single equipment details\n3. POST /api/equipment - Create new equipment\n4. PUT /api/equipment/:id - Update equipment\n5. DELETE /api/equipment/:id - Archive equipment (soft delete)\n6. GET /api/equipment/categories - List all categories\n7. POST /api/equipment/categories - Create new category\n8. PUT /api/equipment/categories/:id - Update category\n9. DELETE /api/equipment/categories/:id - Delete category\n\nImplement proper validation for all endpoints. Include filtering by category, status, and assignment. Support search functionality across name, make, model, and serial number fields. Implement pagination with customizable page size.",
+        "testStrategy": "Write integration tests for each endpoint covering success and error cases. Test validation rules, filtering, and pagination. Verify proper error handling for invalid inputs and unauthorized access. Test search functionality with various query parameters.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Create Equipment Listing View Component",
+        "description": "Develop the table/card-based layout for equipment listing with filters, search, and bulk actions.",
+        "status": "done",
+        "dependencies": [
+          3
+        ],
+        "priority": "high",
+        "details": "Create a responsive listing component with the following features:\n1. Dual view mode: table and card layouts with toggle\n2. Filterable by Category, Status, and Assigned To\n3. Search bar that queries across name, make, model, and serial number\n4. Bulk selection with checkboxes\n5. Action buttons for Add, Edit, View, Archive, and Reassign\n6. Pagination controls\n7. Sortable columns (for table view)\n8. Status indicators with appropriate colors\n9. Quick view of assignment information\n\nImplement data fetching with React Query or SWR for efficient caching and revalidation. Add loading states and error handling. Ensure responsive design works on desktop and tablet.",
+        "testStrategy": "",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Implement Add/Edit Equipment Form",
+        "description": "Create a comprehensive form for adding and editing equipment with all required fields and validation.",
+        "details": "Develop a multi-step or tabbed form with the following sections:\n1. Basic Info: name, category (dropdown), make, model, serial number, description, tags (multi-select)\n2. Media: photo upload with preview, QR code generation and display\n3. Procurement: purchase date, cost, supplier, warranty start/end dates\n4. Usage: meter type selection, initial reading, unit selection\n5. Custom Fields: dynamic field addition based on category\n\nImplement form validation using Formik or React Hook Form with Yup or Zod schemas. Add file upload functionality for photos with preview. Integrate QR code generation for equipment identification. Ensure all fields are properly validated before submission. Implement autosave functionality for long forms.",
+        "testStrategy": "Test form validation for all required fields. Verify file uploads work correctly. Test QR code generation. Ensure form state is preserved between steps. Test error handling for submission failures. Verify custom fields work correctly based on category selection.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Develop Equipment Categories Management",
+        "description": "Create the interface and functionality for managing equipment categories.",
+        "details": "Implement a categories management interface with:\n1. List view of existing categories with edit/delete actions\n2. Add/edit form for categories with name and description\n3. Validation to prevent deletion of categories in use\n4. Ability to set default custom fields for a category\n5. Option to set icon or color for visual identification\n\nCreate the necessary API endpoints for category CRUD operations if not already implemented. Ensure proper validation and error handling. Add confirmation dialogs for destructive actions.",
+        "testStrategy": "Test category creation, editing, and deletion. Verify validation prevents deletion of categories in use. Test custom field association with categories. Ensure UI updates immediately after changes.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Equipment Detail View Screen",
+        "description": "Create the detailed equipment view screen with timeline, assignment info, and tabbed sections.",
+        "details": "Develop a comprehensive detail view with:\n1. Header with equipment name, status, and quick action buttons\n2. Activity timeline showing all events related to the equipment\n3. Current assignment information with quick reassign option\n4. Tabbed interface with sections for:\n   - Summary (basic details)\n   - Activity log (detailed history)\n   - Ownership/assignment history\n   - Check-in/out history\n   - Inspections\n   - Maintenance records\n   - Service history\n   - Documents\n5. Quick actions for Check In/Out, Update Meter, Edit, Archive\n\nImplement data fetching for each tab with lazy loading for performance. Create reusable components for timeline entries, assignment cards, etc. Ensure responsive design for all screen sizes.",
+        "testStrategy": "Test navigation between tabs. Verify all data is displayed correctly. Test quick actions functionality. Ensure lazy loading works properly for performance. Test responsive behavior at different viewport sizes.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Develop Assignment and Check-In/Out Functionality",
+        "description": "Implement the logic and UI for assigning equipment and tracking check-in/out activities.",
+        "details": "Create the following components and functionality:\n1. Assignment form with:\n   - Selection of assignment type (user, vehicle, facility)\n   - Entity selector based on type\n   - Assignment duration (permanent/temporary with dates)\n   - Notes field\n2. Check-in/out workflow with:\n   - Action selection (check in/out)\n   - Location selection\n   - Condition assessment\n   - Notes and photo capture\n3. Assignment history view with timeline\n4. API endpoints for:\n   - POST /api/equipment/:id/assign\n   - POST /api/equipment/:id/check-in\n   - POST /api/equipment/:id/check-out\n   - GET /api/equipment/:id/assignment-history\n\nImplement validation to ensure equipment can only be assigned to one entity at a time. Add confirmation steps for reassignment of already assigned equipment.",
+        "testStrategy": "Test assignment to different entity types. Verify check-in/out process works correctly. Test validation rules for assignments. Ensure history is properly recorded and displayed. Test edge cases like reassigning already assigned equipment.",
+        "priority": "high",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement Status and Meter Tracking",
+        "description": "Develop functionality for tracking equipment status changes and meter readings.",
+        "details": "Create components and API endpoints for:\n1. Status management:\n   - Status change form with reason and notes\n   - Status history timeline\n   - Color indicators for different statuses (Active, In Repair, Out of Service, Retired)\n2. Meter tracking:\n   - Meter reading entry form with validation\n   - Meter reading history with chart visualization\n   - Support for different meter types (distance, time, count)\n   - Unit validation and conversion if needed\n3. API endpoints:\n   - POST /api/equipment/:id/status\n   - GET /api/equipment/:id/status-history\n   - POST /api/equipment/:id/meter-reading\n   - GET /api/equipment/:id/meter-readings\n\nImplement validation to prevent backward meter entries (new reading must be greater than previous). Add confirmation for status changes that affect availability.",
+        "testStrategy": "Test status change workflow and validation. Verify meter reading entry with different units. Test validation preventing backward meter entries. Ensure history is properly recorded and displayed. Test chart visualization of meter readings.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Develop Document Management System",
+        "description": "Implement functionality for attaching, viewing, and managing documents related to equipment.",
+        "details": "Create a document management system with:\n1. Document upload component with:\n   - File selection and drag-drop support\n   - Document type categorization\n   - Description and metadata fields\n   - Progress indicator for uploads\n2. Document listing with:\n   - Filtering by document type\n   - Preview for images and PDFs\n   - Download functionality\n   - Delete/archive options\n3. API endpoints:\n   - POST /api/equipment/:id/documents\n   - GET /api/equipment/:id/documents\n   - DELETE /api/equipment/:id/documents/:docId\n\nImplement secure file storage integration (AWS S3, Azure Blob Storage, or similar). Add validation for file types and sizes. Implement thumbnail generation for images and preview for supported document types.",
+        "testStrategy": "Test file upload with various file types and sizes. Verify preview functionality works for supported formats. Test download and delete operations. Ensure proper error handling for failed uploads. Verify security of file access.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Document Upload Component",
+            "description": "Create a drag-and-drop file upload component with progress indicators and metadata fields",
+            "dependencies": [],
+            "details": "Develop a React component that supports file selection via browser dialog and drag-drop functionality. Implement file type validation, size limits, and multiple file uploads. Add form fields for document type categorization, description, and other metadata. Include a progress indicator for uploads and proper error handling for failed uploads.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Build Document Listing and Filtering UI",
+            "description": "Create an interface to display, filter, and manage uploaded documents",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop a responsive UI component to list all documents with sorting capabilities. Implement filtering by document type, date, and other metadata. Add UI controls for document management actions (download, delete, archive). Ensure the listing updates in real-time after document operations.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Document Preview Functionality",
+            "description": "Implement preview capabilities for different file types including images, PDFs, and other common formats",
+            "dependencies": [
+              2
+            ],
+            "details": "Create a preview component that can render different file types appropriately. Implement thumbnail generation for documents. Add support for in-browser viewing of PDFs, images, and text files. Include fallback options for unsupported file types. Ensure the preview component works well on different screen sizes.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Integrate Secure File Storage",
+            "description": "Set up secure file storage with proper access controls and encryption",
+            "dependencies": [
+              1
+            ],
+            "details": "Integrate with a cloud storage service (AWS S3, Azure Blob Storage, etc.) for document storage. Implement secure access controls and proper authentication for file access. Set up encryption for stored files. Create a service layer to handle file operations (upload, download, delete). Implement proper error handling for storage service failures.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Document Management API Endpoints",
+            "description": "Develop backend API endpoints for document CRUD operations",
+            "dependencies": [
+              4
+            ],
+            "details": "Implement RESTful API endpoints for document operations: POST /api/equipment/:id/documents for uploads, GET /api/equipment/:id/documents for listing, GET /api/documents/:id for single document retrieval, DELETE /api/documents/:id for deletion, and PATCH /api/documents/:id for updating metadata. Add proper validation, error handling, and security measures. Document the API for frontend integration.\n<info added on 2025-07-16T23:11:23.426Z>\nChange of direction: Instead of implementing RESTful API endpoints for document operations, create mock data structures and frontend state management for document functionality. Develop UI components that operate on local state only, with hardcoded sample documents and simulated operations. Create mock functions that mimic API behavior (upload, list, retrieve, delete, update) but store all data in memory or localStorage. Document the mock data structure and simulated operations for future API implementation. Remove any planned API route files from the project structure and update documentation to reflect this temporary approach.\n</info added on 2025-07-16T23:11:23.426Z>",
+            "status": "done",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Implement Bulk Actions and Advanced Filters",
+        "description": "Develop functionality for bulk operations on multiple equipment items and advanced filtering options.",
+        "details": "Create the following features:\n1. Bulk actions:\n   - Multi-select interface in listing view\n   - Bulk archive/unarchive\n   - Bulk status change\n   - Bulk reassignment\n   - Bulk export to CSV/Excel\n2. Advanced filters:\n   - Filter builder interface\n   - Save and load filter presets\n   - Filters for all major fields (status, category, assignment, procurement date, warranty status)\n   - Custom field filters\n3. API endpoints:\n   - POST /api/equipment/bulk-actions\n   - GET /api/equipment/filter-presets\n   - POST /api/equipment/filter-presets\n\nImplement confirmation dialogs for destructive bulk actions. Add progress indicators for long-running bulk operations. Ensure filter combinations work correctly and efficiently.",
+        "testStrategy": "Test bulk operations with varying numbers of selected items. Verify filter combinations produce correct results. Test saved filter presets. Ensure bulk operations handle errors gracefully, especially partial failures. Test performance with large datasets.",
+        "priority": "low",
+        "dependencies": [
+          4,
+          8,
+          9
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Create Activity Timeline and Reporting",
+        "description": "Implement a comprehensive activity timeline and basic reporting functionality.",
+        "details": "Develop the following features:\n1. Activity timeline:\n   - Unified view of all equipment activities\n   - Filtering by activity type\n   - User attribution for actions\n   - Detailed view of each activity\n2. Basic reporting:\n   - Equipment utilization report\n   - Status distribution dashboard\n   - Assignment overview\n   - Maintenance and service history reports\n3. API endpoints:\n   - GET /api/equipment/:id/timeline\n   - GET /api/reports/equipment-utilization\n   - GET /api/reports/status-distribution\n   - GET /api/reports/assignment-overview\n\nImplement data aggregation for reports. Create visualizations using a charting library (e.g., Chart.js, Recharts). Add export functionality for reports (PDF, CSV).",
+        "testStrategy": "Test timeline filtering and display. Verify report data accuracy. Test export functionality for different formats. Ensure visualizations render correctly. Test with large datasets to verify performance.",
+        "priority": "low",
+        "dependencies": [
+          8,
+          9,
+          10
+        ],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Unified Activity Timeline Component",
+            "description": "Create a comprehensive timeline component that displays all equipment activities with filtering capabilities",
+            "dependencies": [],
+            "details": "Develop a timeline component that shows all equipment activities chronologically. Implement filters for activity type, date range, and user. Include user attribution for each action. Create detailed view modal for each activity entry. Ensure the timeline loads efficiently with pagination for large datasets.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Equipment Utilization Report",
+            "description": "Create reports showing equipment usage statistics and patterns",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement charts and visualizations showing equipment utilization rates. Include metrics like usage frequency, duration, and idle time. Create filters for date ranges, categories, and departments. Develop the API endpoint GET /api/reports/equipment-utilization to fetch the required data.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Status Distribution Dashboard",
+            "description": "Create a dashboard showing the distribution of equipment by status",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement pie charts and bar graphs showing equipment distribution across different statuses (available, in-use, maintenance, etc.). Add filtering by category and department. Include trend analysis showing status changes over time. Ensure the dashboard updates in real-time or with a refresh button.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Assignment Overview Report",
+            "description": "Develop a report showing equipment assignments across users and departments",
+            "dependencies": [
+              1
+            ],
+            "details": "Build a report interface showing who has what equipment assigned. Include filters for departments, equipment categories, and date ranges. Create visualizations showing assignment distribution. Add the ability to identify users with the most assigned equipment.",
+            "status": "done",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Maintenance and Service History Reports",
+            "description": "Create reports for tracking maintenance schedules and service history",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop reports showing maintenance schedules, upcoming service needs, and historical service records. Include filters for equipment type, service type, and date ranges. Add visualizations for maintenance frequency and costs. Implement alerts for overdue maintenance items.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Add Report Export Functionality",
+            "description": "Implement functionality to export reports in various formats",
+            "dependencies": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "details": "Add export options for all reports in PDF, CSV, and Excel formats. Implement print-friendly views for reports. Ensure exported reports maintain formatting and include all relevant data. Add options to customize which data is included in exports.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-16T22:32:30.579Z",
+      "updated": "2025-07-17T11:38:13.406Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

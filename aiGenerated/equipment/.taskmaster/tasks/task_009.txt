@@ -1,0 +1,27 @@
+# Task ID: 9
+# Title: Implement Status and Meter Tracking
+# Status: pending
+# Dependencies: 3, 7
+# Priority: medium
+# Description: Develop functionality for tracking equipment status changes and meter readings.
+# Details:
+Create components and API endpoints for:
+1. Status management:
+   - Status change form with reason and notes
+   - Status history timeline
+   - Color indicators for different statuses (Active, In Repair, Out of Service, Retired)
+2. Meter tracking:
+   - Meter reading entry form with validation
+   - Meter reading history with chart visualization
+   - Support for different meter types (distance, time, count)
+   - Unit validation and conversion if needed
+3. API endpoints:
+   - POST /api/equipment/:id/status
+   - GET /api/equipment/:id/status-history
+   - POST /api/equipment/:id/meter-reading
+   - GET /api/equipment/:id/meter-readings
+
+Implement validation to prevent backward meter entries (new reading must be greater than previous). Add confirmation for status changes that affect availability.
+
+# Test Strategy:
+Test status change workflow and validation. Verify meter reading entry with different units. Test validation preventing backward meter entries. Ensure history is properly recorded and displayed. Test chart visualization of meter readings.

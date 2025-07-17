@@ -1,0 +1,26 @@
+# Task ID: 7
+# Title: Implement Equipment Detail View Screen
+# Status: pending
+# Dependencies: 4, 5
+# Priority: medium
+# Description: Create the detailed equipment view screen with timeline, assignment info, and tabbed sections.
+# Details:
+Develop a comprehensive detail view with:
+1. Header with equipment name, status, and quick action buttons
+2. Activity timeline showing all events related to the equipment
+3. Current assignment information with quick reassign option
+4. Tabbed interface with sections for:
+   - Summary (basic details)
+   - Activity log (detailed history)
+   - Ownership/assignment history
+   - Check-in/out history
+   - Inspections
+   - Maintenance records
+   - Service history
+   - Documents
+5. Quick actions for Check In/Out, Update Meter, Edit, Archive
+
+Implement data fetching for each tab with lazy loading for performance. Create reusable components for timeline entries, assignment cards, etc. Ensure responsive design for all screen sizes.
+
+# Test Strategy:
+Test navigation between tabs. Verify all data is displayed correctly. Test quick actions functionality. Ensure lazy loading works properly for performance. Test responsive behavior at different viewport sizes.

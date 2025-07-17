@@ -1,0 +1,28 @@
+# Task ID: 12
+# Title: Create Activity Timeline and Reporting
+# Status: pending
+# Dependencies: 8, 9, 10
+# Priority: low
+# Description: Implement a comprehensive activity timeline and basic reporting functionality.
+# Details:
+Develop the following features:
+1. Activity timeline:
+   - Unified view of all equipment activities
+   - Filtering by activity type
+   - User attribution for actions
+   - Detailed view of each activity
+2. Basic reporting:
+   - Equipment utilization report
+   - Status distribution dashboard
+   - Assignment overview
+   - Maintenance and service history reports
+3. API endpoints:
+   - GET /api/equipment/:id/timeline
+   - GET /api/reports/equipment-utilization
+   - GET /api/reports/status-distribution
+   - GET /api/reports/assignment-overview
+
+Implement data aggregation for reports. Create visualizations using a charting library (e.g., Chart.js, Recharts). Add export functionality for reports (PDF, CSV).
+
+# Test Strategy:
+Test timeline filtering and display. Verify report data accuracy. Test export functionality for different formats. Ensure visualizations render correctly. Test with large datasets to verify performance.
