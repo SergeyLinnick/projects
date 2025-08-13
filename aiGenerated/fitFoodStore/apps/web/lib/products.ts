@@ -1,89 +1,98 @@
 // Mock products data - replace with real API calls
 export interface Product {
-  id: string
-  name: string
-  price: number
-  description: string
-  image: string
-  category: string
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
 }
 
 const mockProducts: Product[] = [
   {
-    id: '1',
+    id: "1",
     name: 'Протеїновий коктейль "FitFuel"',
     price: 450,
-    description: 'Високоякісний протеїновий коктейль з натуральними інгредієнтами для підтримки м\'язової маси та відновлення після тренувань.',
-    image: 'https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Протеїн',
-    category: 'Протеїни'
+    description:
+      "Високоякісний протеїновий коктейль з натуральними інгредієнтами для підтримки м'язової маси та відновлення після тренувань.",
+    image: "https://picsum.photos/400/300?random=1",
+    category: "Протеїни",
   },
   {
-    id: '2',
+    id: "2",
     name: 'BCAA амінокислоти "MuscleMax"',
     price: 320,
-    description: 'Комплекс амінокислот для швидкого відновлення м\'язів та зменшення болю після тренувань.',
-    image: 'https://via.placeholder.com/400x300/10B981/FFFFFF?text=BCAA',
-    category: 'Амінокислоти'
+    description:
+      "Комплекс амінокислот для швидкого відновлення м'язів та зменшення болю після тренувань.",
+    image: "https://picsum.photos/400/300?random=2",
+    category: "Амінокислоти",
   },
   {
-    id: '3',
+    id: "3",
     name: 'Креатин моногідрат "PowerPlus"',
     price: 280,
-    description: 'Чистий креатин для підвищення сили та витривалості під час тренувань.',
-    image: 'https://via.placeholder.com/400x300/F59E0B/FFFFFF?text=Креатин',
-    category: 'Креатин'
+    description:
+      "Чистий креатин для підвищення сили та витривалості під час тренувань.",
+    image: "https://picsum.photos/400/300?random=3",
+    category: "Креатин",
   },
   {
-    id: '4',
+    id: "4",
     name: 'Вітамінно-мінеральний комплекс "HealthBoost"',
     price: 380,
-    description: 'Повний комплекс вітамінів та мінералів для підтримки здоров\'я та імунної системи.',
-    image: 'https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=Вітаміни',
-    category: 'Вітаміни'
+    description:
+      "Повний комплекс вітамінів та мінералів для підтримки здоров'я та імунної системи.",
+    image: "https://picsum.photos/400/300?random=4",
+    category: "Вітаміни",
   },
   {
-    id: '5',
+    id: "5",
     name: 'Омега-3 жирні кислоти "FishOil Pro"',
     price: 420,
-    description: 'Високоякісні омега-3 жирні кислоти для здоров\'я серця та судин.',
-    image: 'https://via.placeholder.com/400x300/06B6D4/FFFFFF?text=Омега-3',
-    category: 'Жирні кислоти'
+    description:
+      "Високоякісні омега-3 жирні кислоти для здоров'я серця та судин.",
+    image: "https://picsum.photos/400/300?random=5",
+    category: "Жирні кислоти",
   },
   {
-    id: '6',
+    id: "6",
     name: 'Пре-тренувальний комплекс "EnergyRush"',
     price: 350,
-    description: 'Енергетичний комплекс для підвищення продуктивності та фокусу під час тренувань.',
-    image: 'https://via.placeholder.com/400x300/EF4444/FFFFFF?text=Пре-тренування',
-    category: 'Пре-тренування'
-  }
-]
+    description:
+      "Енергетичний комплекс для підвищення продуктивності та фокусу під час тренувань.",
+    image: "https://picsum.photos/400/300?random=6",
+    category: "Пре-тренування",
+  },
+];
 
 export async function getProducts(): Promise<Product[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500))
-  return mockProducts
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return mockProducts;
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 300))
-  return mockProducts.find(product => product.id === id) || null
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  return mockProducts.find((product) => product.id === id) || null;
 }
 
-export async function getProductsByCategory(category: string): Promise<Product[]> {
+export async function getProductsByCategory(
+  category: string
+): Promise<Product[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 400))
-  return mockProducts.filter(product => product.category === category)
+  await new Promise((resolve) => setTimeout(resolve, 400));
+  return mockProducts.filter((product) => product.category === category);
 }
 
 export async function searchProducts(query: string): Promise<Product[]> {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 400))
-  const lowercaseQuery = query.toLowerCase()
-  return mockProducts.filter(product => 
-    product.name.toLowerCase().includes(lowercaseQuery) ||
-    product.description.toLowerCase().includes(lowercaseQuery) ||
-    product.category.toLowerCase().includes(lowercaseQuery)
-  )
-} 
+  await new Promise((resolve) => setTimeout(resolve, 400));
+  const lowercaseQuery = query.toLowerCase();
+  return mockProducts.filter(
+    (product) =>
+      product.name.toLowerCase().includes(lowercaseQuery) ||
+      product.description.toLowerCase().includes(lowercaseQuery) ||
+      product.category.toLowerCase().includes(lowercaseQuery)
+  );
+}

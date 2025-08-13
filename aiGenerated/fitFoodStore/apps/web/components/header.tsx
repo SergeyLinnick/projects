@@ -1,11 +1,19 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useCartStore } from '@/lib/store'
+import Link from "next/link";
+import { useCartStore } from "@/lib/store";
+import { useEffect, useState } from "react";
 
 export function Header() {
-  const { items } = useCartStore()
-  const itemCount = items.reduce((total, item) => total + item.quantity, 0)
+  const { items } = useCartStore();
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure hydration compatibility
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -14,33 +22,41 @@ export function Header() {
           <Link href="/" className="text-2xl font-bold text-blue-600">
             FitFood Store
           </Link>
-          
+
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link
+              href="/"
+              className="text-gray-700 hover:text-blue-600 transition-colors"
+            >
               Головна
             </Link>
-            <Link href="/products" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link
+              href="/products"
+              className="text-gray-700 hover:text-blue-600 transition-colors"
+            >
               Товари
             </Link>
           </nav>
-          
+
           <div className="flex items-center space-x-4">
-            <Link href="/cart" className="relative">
-              <svg
-                className="w-6 h-6 text-gray-700 hover:text-blue-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m6 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
-                />
-              </svg>
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            <Link href="/cart" className="relative group">
+              <div className="p-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                <svg
+                  className="w-6 h-6 text-gray-700 group-hover:text-blue-600 transition-colors duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+              </div>
+              {mounted && itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-medium rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
                   {itemCount}
                 </span>
               )}
@@ -49,5 +65,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
-} 
+  );
+}
