@@ -7,9 +7,11 @@ import Setup from "@/app/(home)/sections/setup";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SvgIcons } from "@/components/svg-icons";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 
 import Variants from "./sections/variants";
+
+// Force dynamic rendering to prevent SSG issues
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (

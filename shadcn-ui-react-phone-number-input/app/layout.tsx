@@ -5,8 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-import { siteConfig } from "../config/site";
-
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,26 +23,20 @@ export const metadata: Metadata = {
     "radix ui",
     "react phone input",
   ],
-  authors: [
-    {
-      name: "Omer Alpi",
-      url: "https://jaleelbennett.com",
-    },
-  ],
-  creator: "Omer Alpi",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    url: "https://shadcn-phone-input.vercel.app",
+    title: "Shadcn Phone Input",
+    description:
+      "A phone input component implementation of Shadcn's input component",
+    siteName: "Shadcn Phone Input",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    creator: "@omeralpi",
+    title: "Shadcn Phone Input",
+    description:
+      "A phone input component implementation of Shadcn's input component",
   },
 };
 

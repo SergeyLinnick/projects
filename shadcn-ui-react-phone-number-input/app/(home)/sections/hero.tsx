@@ -5,7 +5,6 @@ import { FormInSheetExample } from "@/components/examples/form-in-sheet-example"
 import { StandaloneFormExample } from "@/components/examples/standalone-form-dialog-example";
 import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { siteConfig } from "@/config/site";
 
 export default function Hero() {
   return (
@@ -28,15 +27,6 @@ export default function Hero() {
               })} min-w-[150px] shadow-sm`}
             >
               Try it out
-            </Link>
-            <Link
-              href={siteConfig.links.github}
-              className={`${buttonVariants({
-                variant: "secondary",
-                size: "lg",
-              })} shadow-sm`}
-            >
-              Github
             </Link>
           </div>
         </div>

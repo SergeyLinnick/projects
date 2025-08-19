@@ -1,4 +1,7 @@
-import { allSnippets, Snippet as SnippetType } from "contentlayer/generated";
+"use client";
+
+import type { Snippet as SnippetType } from "contentlayer/generated";
+import { useEffect, useState } from "react";
 
 import CodeBlock from "@/components/code-block";
 import { Snippet } from "@/components/snippet";
@@ -9,9 +12,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const snippets: SnippetType[] = allSnippets.sort((a, b) => a.order - b.order);
-
 export default function Setup() {
+  const [snippets, setSnippets] = useState<SnippetType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Dynamically import contentlayer data to avoid SSR issues
+    import("contentlayer/generated")
+      .then(({ allSnippets }) => {
+        const sortedSnippets = allSnippets.sort((a, b) => a.order - b.order);
+        setSnippets(sortedSnippets);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to load snippets:", error);
+        setLoading(false);
+      });
+  }, []);
   return (
     <section id="setup" className="w-full max-w-5xl py-8">
       <h2 className="font-heading mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">
@@ -75,18 +92,28 @@ export default function Setup() {
           <h3 className="font-heading mt-12 scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight first:mt-0">
             Snippets
           </h3>
-          <Accordion type="single" collapsible defaultValue={snippets[0].file}>
-            {snippets.map((snippet) => (
-              <AccordionItem key={snippet.slug} value={snippet.file}>
-                <AccordionTrigger id={snippet.file}>
-                  <code>{snippet.file}</code>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Snippet snippet={snippet} />
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          {loading ? (
+            <p>Loading snippets...</p>
+          ) : snippets.length > 0 ? (
+            <Accordion
+              type="single"
+              collapsible
+              defaultValue={snippets[0]?.file}
+            >
+              {snippets.map((snippet) => (
+                <AccordionItem key={snippet.slug} value={snippet.file}>
+                  <AccordionTrigger id={snippet.file}>
+                    <code>{snippet.file}</code>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Snippet snippet={snippet} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          ) : (
+            <p>No snippets available.</p>
+          )}
         </div>
       </div>
     </section>

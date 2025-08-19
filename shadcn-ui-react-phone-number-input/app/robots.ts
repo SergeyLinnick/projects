@@ -1,7 +1,5 @@
 import { MetadataRoute } from "next";
 
-import { siteConfig } from "../config/site";
-
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -9,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: "https://shadcn-phone-input.vercel.app/sitemap.xml",
   };
 }
