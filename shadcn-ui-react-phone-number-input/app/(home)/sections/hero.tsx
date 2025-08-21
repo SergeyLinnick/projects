@@ -1,9 +1,6 @@
-import Link from "next/link";
-
 import { FormInDialogExample } from "@/components/examples/form-in-dialog-example";
 import { FormInSheetExample } from "@/components/examples/form-in-sheet-example";
 import { StandaloneFormExample } from "@/components/examples/standalone-form-dialog-example";
-import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Hero() {
@@ -18,17 +15,6 @@ export default function Hero() {
             An implementation of a Phone Input component for <b>React</b>, built
             on top of Shadcn UI&apos;s input component.
           </p>
-          <div className="mt-1 flex gap-2">
-            <Link
-              href="#try"
-              className={`${buttonVariants({
-                variant: "default",
-                size: "lg",
-              })} min-w-[150px] shadow-sm`}
-            >
-              Try it out
-            </Link>
-          </div>
         </div>
 
         <div id="try" className="w-full py-8">

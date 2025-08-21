@@ -12,6 +12,7 @@ const components = {
 
 export function Snippet({ snippet }: { snippet: SnippetType }) {
   const [isHydrated, setIsHydrated] = React.useState(false);
+  const [hasError, setHasError] = React.useState(false);
 
   React.useEffect(() => {
     setIsHydrated(true);
@@ -37,10 +38,33 @@ export function Snippet({ snippet }: { snippet: SnippetType }) {
     return <div>Error: Could not render snippet</div>;
   }
 
+  // Wrap the MDX content in an error boundary
+  if (hasError) {
+    return (
+      <div className="flex min-h-[200px] w-full flex-col items-center justify-center rounded-md border p-8 text-center">
+        <h3 className="mb-4 text-lg font-semibold">Snippet Rendering Error</h3>
+        <p className="mb-4 text-sm text-muted-foreground">
+          There was an error rendering this code snippet.
+        </p>
+        <button
+          onClick={() => setHasError(false)}
+          className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
   try {
-    return <MDXContent components={components} />;
+    return (
+      <div onError={() => setHasError(true)}>
+        <MDXContent components={components} />
+      </div>
+    );
   } catch (error) {
     console.error("Error rendering MDX:", error);
-    return <div>Error rendering snippet</div>;
+    setHasError(true);
+    return null;
   }
 }

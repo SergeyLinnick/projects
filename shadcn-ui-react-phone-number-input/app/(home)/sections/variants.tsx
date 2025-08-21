@@ -7,6 +7,7 @@ import {
 } from "react-phone-number-input";
 import tr from "react-phone-number-input/locale/tr";
 
+import { ErrorBoundary } from "@/components/error-boundary";
 import { PhoneInput } from "@/components/ui/phone-input";
 
 export default function Variants() {
@@ -30,11 +31,13 @@ export default function Variants() {
             Summary
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              placeholder="Enter a phone number"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                placeholder="Enter a phone number"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -42,12 +45,14 @@ export default function Variants() {
             Setting default country
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              defaultCountry="TR"
-              placeholder="Enter a phone number"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                defaultCountry="TR"
+                placeholder="Enter a phone number"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -55,12 +60,14 @@ export default function Variants() {
             Internationalization
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              labels={tr}
-              placeholder="Telefon numarası"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                labels={tr}
+                placeholder="Telefon numarası"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -68,12 +75,14 @@ export default function Variants() {
             Force international format
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              international
-              defaultCountry="TR"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                international
+                defaultCountry="TR"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -81,13 +90,15 @@ export default function Variants() {
             Force national format
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              international={false}
-              defaultCountry="TR"
-              placeholder="Enter a phone number"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                international={false}
+                defaultCountry="TR"
+                placeholder="Enter a phone number"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -95,12 +106,14 @@ export default function Variants() {
             initialValueFormat
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <PhoneInput
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              initialValueFormat="national"
-              placeholder="Enter a phone number"
-            />
+            <ErrorBoundary>
+              <PhoneInput
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                initialValueFormat="national"
+                placeholder="Enter a phone number"
+              />
+            </ErrorBoundary>
           </div>
         </div>
         <div className="w-full">
@@ -109,12 +122,14 @@ export default function Variants() {
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <div>
-              <PhoneInput
-                value={phoneNumber}
-                onChange={setPhoneNumber}
-                onCountryChange={setCountry}
-                placeholder="Enter a phone number"
-              />
+              <ErrorBoundary>
+                <PhoneInput
+                  value={phoneNumber}
+                  onChange={setPhoneNumber}
+                  onCountryChange={setCountry}
+                  placeholder="Enter a phone number"
+                />
+              </ErrorBoundary>
               <div className="mt-4 space-y-2 text-sm">
                 <div>
                   National: {phoneNumber && formatPhoneNumber(phoneNumber)}

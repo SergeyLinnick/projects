@@ -32,6 +32,20 @@ type PhoneInputProps = Omit<
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
   React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
     ({ className, onChange, value, ...props }, ref) => {
+      // Add defensive programming to prevent undefined errors
+      const handleChange = React.useCallback(
+        (value: RPNInput.Value | undefined) => {
+          try {
+            onChange?.(value || ("" as RPNInput.Value));
+          } catch (error) {
+            console.error("PhoneInput onChange error:", error);
+            // Fallback to empty string if there's an error
+            onChange?.("" as RPNInput.Value);
+          }
+        },
+        [onChange],
+      );
+
       return (
         <RPNInput.default
           ref={ref}
@@ -50,7 +64,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
            *
            * @param {E164Number | undefined} value - The entered value
            */
-          onChange={(value) => onChange?.(value || ("" as RPNInput.Value))}
+          onChange={handleChange}
           {...props}
         />
       );
@@ -88,6 +102,11 @@ const CountrySelect = ({
   const scrollAreaRef = React.useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
+
+  // Add safety check for countryList
+  const safeCountryList = React.useMemo(() => {
+    return Array.isArray(countryList) ? countryList : [];
+  }, [countryList]);
 
   return (
     <Popover
@@ -140,7 +159,7 @@ const CountrySelect = ({
             <ScrollArea ref={scrollAreaRef} className="h-72">
               <CommandEmpty>No country found.</CommandEmpty>
               <CommandGroup>
-                {countryList.map(({ value, label }) =>
+                {safeCountryList.map(({ value, label }) =>
                   value ? (
                     <CountrySelectOption
                       key={value}
@@ -192,7 +211,13 @@ const CountrySelectOption = ({
 };
 
 const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
-  const Flag = flags[country];
+  // Add safety check for country and flags
+  const Flag = React.useMemo(() => {
+    if (!country || !flags || typeof flags !== "object") {
+      return null;
+    }
+    return flags[country as keyof typeof flags];
+  }, [country]);
 
   return (
     <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20 [&_svg:not([class*='size-'])]:size-full">

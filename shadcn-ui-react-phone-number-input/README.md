@@ -21,7 +21,7 @@ A beautiful, accessible, and feature-rich phone input component built with [shad
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 - A Next.js project with shadcn/ui setup
 
@@ -73,10 +73,11 @@ function MyForm() {
 ### With React Hook Form
 
 ```tsx
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { z } from "zod";
+
 import { PhoneInput } from "@/components/ui/phone-input";
 
 const FormSchema = z.object({
@@ -120,34 +121,31 @@ The `PhoneInput` component accepts all props from `react-phone-number-input` plu
 
 ### Common Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | `""` | The phone number value |
-| `onChange` | `(value: string) => void` | - | Callback when value changes |
-| `defaultCountry` | `Country` | - | Default country code (e.g., "US") |
-| `international` | `boolean` | `true` | Force international format |
-| `placeholder` | `string` | - | Input placeholder text |
-| `disabled` | `boolean` | `false` | Disable the input |
-| `labels` | `object` | - | Localization labels |
+| Prop             | Type                      | Default | Description                       |
+| ---------------- | ------------------------- | ------- | --------------------------------- |
+| `value`          | `string`                  | `""`    | The phone number value            |
+| `onChange`       | `(value: string) => void` | -       | Callback when value changes       |
+| `defaultCountry` | `Country`                 | -       | Default country code (e.g., "US") |
+| `international`  | `boolean`                 | `true`  | Force international format        |
+| `placeholder`    | `string`                  | -       | Input placeholder text            |
+| `disabled`       | `boolean`                 | `false` | Disable the input                 |
+| `labels`         | `object`                  | -       | Localization labels               |
 
 ### Advanced Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `initialValueFormat` | `"national" \| "international"` | Initial value format |
-| `onCountryChange` | `(country: Country) => void` | Country change callback |
-| `smartCaret` | `boolean` | Smart caret positioning |
-| `className` | `string` | Additional CSS classes |
+| Prop                 | Type                            | Description             |
+| -------------------- | ------------------------------- | ----------------------- |
+| `initialValueFormat` | `"national" \| "international"` | Initial value format    |
+| `onCountryChange`    | `(country: Country) => void`    | Country change callback |
+| `smartCaret`         | `boolean`                       | Smart caret positioning |
+| `className`          | `string`                        | Additional CSS classes  |
 
 ## 🌍 Internationalization
 
 ### Setting Default Country
 
 ```tsx
-<PhoneInput
-  defaultCountry="TR"
-  placeholder="Enter phone number"
-/>
+<PhoneInput defaultCountry="TR" placeholder="Enter phone number" />
 ```
 
 ### Localization
@@ -155,10 +153,7 @@ The `PhoneInput` component accepts all props from `react-phone-number-input` plu
 ```tsx
 import tr from "react-phone-number-input/locale/tr";
 
-<PhoneInput
-  labels={tr}
-  placeholder="Telefon numarası"
-/>
+<PhoneInput labels={tr} placeholder="Telefon numarası" />;
 ```
 
 ### Format Options
@@ -181,10 +176,7 @@ import tr from "react-phone-number-input/locale/tr";
 The component uses Tailwind CSS classes and can be customized through the `className` prop:
 
 ```tsx
-<PhoneInput
-  className="w-full max-w-md"
-  placeholder="Custom styled input"
-/>
+<PhoneInput className="w-full max-w-md" placeholder="Custom styled input" />
 ```
 
 ### Theme Integration
@@ -196,7 +188,12 @@ The component automatically adapts to your shadcn/ui theme and supports both lig
 ### Form in Dialog
 
 ```tsx
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { PhoneInput } from "@/components/ui/phone-input";
 
 function PhoneFormDialog() {
@@ -254,17 +251,20 @@ app/
 ### Setup
 
 1. **Clone the repository:**
+
 ```bash
 git clone https://github.com/omeralpi/shadcn-phone-input.git
 cd shadcn-phone-input
 ```
 
 2. **Install dependencies:**
+
 ```bash
 pnpm install
 ```
 
 3. **Run the development server:**
+
 ```bash
 pnpm dev
 ```
