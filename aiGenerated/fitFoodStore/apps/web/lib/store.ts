@@ -169,6 +169,13 @@ export const useCartStore = create<CartStore>()(
           set({ isSyncing: false });
         }, 100);
       },
+
+      // Cart validation method
+      validateCartState: (items: CartItem[]) => {
+        // This will be called by the validation hook
+        // For now, just log validation trigger
+        console.log("🔍 Cart validation triggered for", items.length, "items");
+      },
     }),
     {
       name: "cart-storage",
