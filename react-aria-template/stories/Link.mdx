@@ -1,0 +1,36 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+A <a href="https://react-spectrum.adobe.com/react-aria/Link.html#link" target="_blank">**link**</a> allows a user to navigate to another page or resource within a web page or application.
+
+<Canvas of={LinkStories.BasicExample} />
+
+## Link With icon
+
+<Canvas of={LinkStories.LinkWithIcons} />
+
+## Disabled state
+
+<Canvas of={LinkStories.DisabledState} />
+
+## As Nav links
+
+<Canvas of={LinkStories.NavLinks} />
+
+## With avatars
+
+Use the <a href="./?path=/docs/avatar--docs" target="_blank">**Avatar**</a> component to render avatar inside a link.
+
+<Canvas of={LinkStories.WithAvatars} />
+
+
+## With button style
+
+Use the `getButtonStyles` function to apply button styles to a link.
+
+<Canvas of={LinkStories.WithButtonStyle} />

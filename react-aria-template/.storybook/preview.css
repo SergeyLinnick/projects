@@ -1,0 +1,63 @@
+.sbdocs-preview {
+  box-shadow: none !important;
+  border-radius: 8px !important;
+}
+
+/* Update font family */
+[class^='css-'],
+[class^='css-'] + p {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+}
+
+code[class^='css-'] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  'Liberation Mono', 'Courier New', monospace !important;
+font-weight: bolder !important;
+  border: 0px !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  font-weight: bolder !important;
+}
+
+code:before,
+code:after {
+  content: '`';
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace !important;
+  font-weight: bolder !important;
+}
+
+h1[class^='css'] {
+  font-weight: 500 !important;
+  font-size: 1.5rem !important;
+}
+
+h1[class^='css'] + p,
+h1[class^='css'] + p + p {
+  font-size: 1rem !important;
+}
+
+h2 + .sbdocs > .docs-story.bg-background,
+h2 + p + .sbdocs > .docs-story.bg-background,
+h3 + .sbdocs > .docs-story.bg-background,
+h3 + p + .sbdocs > .docs-story.bg-background {
+  padding: 48px 32px !important;
+}
+
+h2[class^='css'] {
+  border-bottom: 0px !important;
+  font-weight: 500;
+  font-size: 1rem !important;
+}
+
+h3[class^='css'] {
+  font-weight: 500;
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+  font-size: 1rem !important;
+}
+
+p + h2 {
+  margin-top: 2.5rem !important;
+}

@@ -1,0 +1,81 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+ 
+import * as AvatarStories from './Avatar.stories';
+ 
+<Meta of={AvatarStories} />
+
+# Avatar
+ 
+An avatar is a thumbnail representation of an entity, such as a user or an organization.
+
+<Canvas of={AvatarStories.BasicExample} />
+
+## Round avatar
+
+Use `rounded-full` utility to render a rounded avatar.
+
+<Canvas of={AvatarStories.RoundedAvatars} />
+
+
+## Avatar sizes
+
+An avatar supports a range of sizes from 16(px) to 128(px). The default is 40(px).
+
+<Canvas of={AvatarStories.AvatarSizes} />
+
+### Initial fallback
+
+The `alt` prop is used to generate initial avatar when image src is not available.
+
+<Canvas of={AvatarStories.InitialFallbacks} />
+
+### Icon fallback
+
+Use the `fallback="icon"` to show a placeholder avatar icon when image src not available.
+
+<Canvas of={AvatarStories.IconFallbacks} />
+
+
+### Colorful
+
+The `colorful` prop can be used to render colorful avatars.
+
+<Canvas of={AvatarStories.Colorful} />
+
+### Brand Color
+
+Use the `background` prop to set the fallback avatar background.
+
+<Canvas of={AvatarStories.BrandColor} />
+
+
+### Avatar badges
+
+Use the `AvatarBadge` component to add badges. Badges are positioned at the bottom right corner of the avatar. Badge icon should be wrapped within the `Icon` component and include an `aria-label` for accessibility. `AvatarBadge` uses <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask" target="_blank">**mask**</a> to make it work with different backgrounds.
+
+<Canvas of={AvatarStories.AvatarBadges} />
+
+### Avatar badge sizes
+
+Badge sizes are automatically scaled based on the avatar size.
+
+<Canvas of={AvatarStories.AvatarBadgeSizes} />
+
+### Style Avatar badges
+
+Use `className` to style the badge size, background and position.
+
+<Canvas of={AvatarStories.StyleAvatarBadge} />
+
+
+## Avatar groups
+
+Use the `AvatarGroup` component to stack avatars.
+
+<Canvas of={AvatarStories.AvatarGroups} />
+
+## Avatar groups with reverse overlap
+
+Use the `reverse` prop to reverse the overlap.
+
+<Canvas of={AvatarStories.AvatarGroupsWithReverseOverlap} />
