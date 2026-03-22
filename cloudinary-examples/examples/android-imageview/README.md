@@ -1,1 +1,0 @@
-# Android Cloudinary ImageView
